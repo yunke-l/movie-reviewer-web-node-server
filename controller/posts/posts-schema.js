@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const schema = mongoose.Schema({
    // _id: ObjectId,          // Unique identifier for the post
-    //userId: ObjectId,       // ID of the user who created the post
+    userId: String,       // ID of the user who created the post
     imdbid: String,         // IMDb ID of the movie the post is about
     movieTitle: String,
     moviePoster: String,
@@ -14,6 +14,7 @@ const schema = mongoose.Schema({
     disliked: Boolean,
     // rating: Number,         // Rating given by the user (e.g., 1 to 10)
     createdAt: Date,        // Timestamp of when the post was created
+    userAvatar: String,
     //createdAt: String,
     // updatedAt: Date,        // Timestamp of when the post was last updated
   }, {collection: 'posts'}); 

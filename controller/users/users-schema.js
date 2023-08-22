@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const usersSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -12,7 +13,7 @@ const usersSchema = new mongoose.Schema({
   email: String,
   avatar: {
     type: String,
-    default: "../images/default-avatar.jpg" // Set the default avatar path
+    default: "https://t3.ftcdn.net/jpg/02/09/37/00/360_F_209370065_JLXhrc5inEmGl52SyvSPeVB23hB6IjrR.jpg" // Set the default avatar path
   },
   level:{
     type: Number,

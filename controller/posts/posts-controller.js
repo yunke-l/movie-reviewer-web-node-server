@@ -4,7 +4,6 @@ const createPost = async (req, res) => {
     const newPost = req.body;
     //newPost._id = (new Date()).getTime() + '';
     
-    newPost.username = "Gwen Stacy";
     newPost.likes = 0;
     newPost.dislikes = 0;
     newPost.liked = false;
