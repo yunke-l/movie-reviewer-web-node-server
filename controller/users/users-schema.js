@@ -19,6 +19,15 @@ const usersSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+
+  followers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],// the array's default value will be an empty array []
+  following: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
   
 
 }, { collection: "users" });
