@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from 'express';
 import cors from 'cors';
 import PostsController from './controller/posts/posts-controller.js';
@@ -7,8 +8,10 @@ import AuthController from './controller/users/auth-controller.js';
 
 
 import mongoose from "mongoose";
-mongoose.connect("mongodb://127.0.0.1:27017/movie-reviewer");
+// mongoose.connect("mongodb://127.0.0.1:27017/movie-reviewer");
 
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/movie-reviewer';
+mongoose.connect(CONNECTION_STRING);
 
 const app = express();
 app.use(

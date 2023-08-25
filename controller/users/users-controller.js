@@ -63,10 +63,36 @@ const updateUser = async (req, res) => {
     const id = req.params.uid;
     const updates = req.body;
     const status = await usersDao.updateUser(uid, updates);
+    // const status = await usersDao.updateUser(id, updates);
+    // const user = await usersDao.findUserById(id); 
     const user = await usersDao.findUserById(uid); // retrieve user with new changes
     req.session["currentUser"] = user; // update currentUser with changes
     res.json(status);
 }
 
+// Add follow and unfollow logic 
+export const followUser = async (req, res) => {
+  const followerId = req.params.followerId;
+  const userIdToFollow = req.params.userIdToFollow;
+
+  try {
+    const status = await usersDao.followUser(followerId, userIdToFollow);
+    res.json(status);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const unfollowUser = async (req, res) => {
+  const followerId = req.params.followerId;
+  const userIdToUnfollow = req.params.userIdToUnfollow;
+
+  try {
+    const status = await usersDao.unfollowUser(followerId, userIdToUnfollow);
+    res.json(status);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 export default UserController;

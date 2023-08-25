@@ -3,21 +3,6 @@ var currentUserVar;
 const AuthController = (app) => {
     
  const register = async (req, res) => { 
-    // const username = req.body.username;
-    // const user = usersDao.findUserByUsername(username);
-    // if (user) {
-    //   //console.log("Username already exists.")
-    //   res.sendStatus(409).send({error: "Username already exists."});
-    //   return;
-    // }
-    // // const newUser = usersDao.createUser(req.body);
-    // const newUser = {   _id: new Date().getTime() + "", firstName:req.body.firstName, lastName:req.body.lastName, username:req.body.username, password:req.body.password  }
-    // usersDao.createUser(newUser);
-    // //currentUserVaribale = newUser;
-    // req.session["currentUser"] = newUser;
-    // console.log(newUser)
-    // res.json(newUser);
-    // //console.log("User registered")
     const user = await usersDao.findUserByUsername(req.body.username);
     if (user) {
       res.sendStatus(403);
@@ -29,18 +14,6 @@ const AuthController = (app) => {
  };
 
  const login = async (req, res) => {
-    // const username = req.body.username;
-    // const password = req.body.password;
-    // const user = usersDao.findUserByCredentials(username, password);
-    // if (user) {
-    //   req.session["currentUser"] = user;
-    //   res.json(user);
-    //   //console.log("User logged in.")
-    // } else {
-    //   res.sendStatus(404).send("User doesn't exist");
-    //   //res.status(404).json({ error: "User doesn't exist" });
-    //   //console.log("User doesn't exist")
-    // }
     const username = req.body.username;
     const password = req.body.password;
     if (username && password) {
@@ -58,14 +31,14 @@ const AuthController = (app) => {
   };
  
   const profile  = async (req, res) => { 
-   //const currentUser = currentUserVar;
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
+      // console.log("not current user error")
       res.sendStatus(404);
       return;
     }
     res.json(currentUser);
-    //console.log("current user", currentUser)
+    // console.log("current user", currentUser)
  };
 
  const logout  = async (req, res) => {
@@ -96,6 +69,7 @@ const AuthController = (app) => {
 
       req.session["currentUser"] = { ...user, ...req.body };
       const updatedUser = { ...req.body };
+      // console.log("called update ", updatedUser)
       res.status(200).json({ user: updatedUser });
 
       //return res.json(currentUserVar);
